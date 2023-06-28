@@ -9,71 +9,71 @@ using namespace sf;
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-class Virus // Абстрактный класс вирус
+class Virus // РђР±СЃС‚СЂР°РєС‚РЅС‹Р№ РєР»Р°СЃСЃ РІРёСЂСѓСЃ
 {
 protected:
-    std::string strain; // Штамм вируса. Например "Альфа", "Бета", "Омикрон".
-    std::string name; // Название вируса
-    int numInfected; // Количество зараженных людей
-    int propagationPerSecond; // Шанс распространения
-    double lethality; // Летальность
+    std::string strain; // РЁС‚Р°РјРј РІРёСЂСѓСЃР°. РќР°РїСЂРёРјРµСЂ "РђР»СЊС„Р°", "Р‘РµС‚Р°", "РћРјРёРєСЂРѕРЅ".
+    std::string name; // РќР°Р·РІР°РЅРёРµ РІРёСЂСѓСЃР°
+    int numInfected; // РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°СЂР°Р¶РµРЅРЅС‹С… Р»СЋРґРµР№
+    int propagationPerSecond; // РЁР°РЅСЃ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРёСЏ
+    double lethality; // Р›РµС‚Р°Р»СЊРЅРѕСЃС‚СЊ
 public:
-    //Virus(); // Конструктор
-    Virus(std::string n, std::string s, int i, int p, double l) : name(n), strain(s), numInfected(i), propagationPerSecond(p), lethality(l) {} // Конструктор с параметрами
-    //virtual ~Virus() = 0 {}; // Деструктор
-    void spread(int time); // Метод, в котором вирус распространяется
-    virtual void mutate() = 0; // Метод, в коротом вирус мутирует
-    virtual void cure() = 0; // Метод, в котором вирус ослабевает
-    //void getInfo(); // Метод, выводящий в виде строки всю информацию об объекте – тип, имена и значения полей.
-    std::string getName() { return name; } // Метод, выводящий имя данного класса
+    //Virus(); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+    Virus(std::string n, std::string s, int i, int p, double l) : name(n), strain(s), numInfected(i), propagationPerSecond(p), lethality(l) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё
+    //virtual ~Virus() = 0 {}; // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
+    void spread(int time); // РњРµС‚РѕРґ, РІ РєРѕС‚РѕСЂРѕРј РІРёСЂСѓСЃ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏРµС‚СЃСЏ
+    virtual void mutate() = 0; // РњРµС‚РѕРґ, РІ РєРѕСЂРѕС‚РѕРј РІРёСЂСѓСЃ РјСѓС‚РёСЂСѓРµС‚
+    virtual void cure() = 0; // РњРµС‚РѕРґ, РІ РєРѕС‚РѕСЂРѕРј РІРёСЂСѓСЃ РѕСЃР»Р°Р±РµРІР°РµС‚
+    //void getInfo(); // РњРµС‚РѕРґ, РІС‹РІРѕРґСЏС‰РёР№ РІ РІРёРґРµ СЃС‚СЂРѕРєРё РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± РѕР±СЉРµРєС‚Рµ вЂ“ С‚РёРї, РёРјРµРЅР° Рё Р·РЅР°С‡РµРЅРёСЏ РїРѕР»РµР№.
+    std::string getName() { return name; } // РњРµС‚РѕРґ, РІС‹РІРѕРґСЏС‰РёР№ РёРјСЏ РґР°РЅРЅРѕРіРѕ РєР»Р°СЃСЃР°
     std::string getStrain() { return strain; }
     int getNumInfected() { return numInfected; }
     int getPropagationPerSecond() { return propagationPerSecond; }
     double getLethality() { return lethality; }
 };
 
-class COVID19 : public Virus // Класс короновирус
+class COVID19 : public Virus // РљР»Р°СЃСЃ РєРѕСЂРѕРЅРѕРІРёСЂСѓСЃ
 {
 public:
-    //COVID19() : Virus("COVID-19", "Omicron", 10, 2, 0.03) {} // Конструктор вызывает конструктор базового класса
-    COVID19(std::string s, int i, double p, double l) : Virus("COVID-19", s, i, p, l) {} // Конструктор с параметрами вызывает конструктор с параметрами базового класса
-    //~COVID19() {} // Деструктор
-    void mutate() override; // Переопределенный метод мутирования вируса
-    void cure() override; // Переопределенный метод ослабевания вируса
-    std::string funcCOVID19(); // Собственный метод класса
+    //COVID19() : Virus("COVID-19", "Omicron", 10, 2, 0.03) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РІС‹Р·С‹РІР°РµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
+    COVID19(std::string s, int i, double p, double l) : Virus("COVID-19", s, i, p, l) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё РІС‹Р·С‹РІР°РµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
+    //~COVID19() {} // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
+    void mutate() override; // РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ РјСѓС‚РёСЂРѕРІР°РЅРёСЏ РІРёСЂСѓСЃР°
+    void cure() override; // РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ РѕСЃР»Р°Р±РµРІР°РЅРёСЏ РІРёСЂСѓСЃР°
+    std::string funcCOVID19(); // РЎРѕР±СЃС‚РІРµРЅРЅС‹Р№ РјРµС‚РѕРґ РєР»Р°СЃСЃР°
 };
 
-class Influenza : public Virus // Класс грипп
+class Influenza : public Virus // РљР»Р°СЃСЃ РіСЂРёРїРї
 {
 public:
-    //Influenza() : Virus("Influenza", "Alfa", 100, 1, 0.01) {} // Конструктор вызывает конструктор базового класса
-    Influenza(std::string s, int i, double p, double l) : Virus("Influenza", s, i, p, l) {} // Конструктор с параметрами вызывает конструктор с параметрами базового класса
-    //~Influenza() {} // Деструктор
-    void mutate() override; // Переопределенный метод мутирования вируса
-    void cure() override; // Переопределенный метод ослабевания вируса
-    std::string funcInfluenza(); // Собственный метод класса
+    //Influenza() : Virus("Influenza", "Alfa", 100, 1, 0.01) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РІС‹Р·С‹РІР°РµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
+    Influenza(std::string s, int i, double p, double l) : Virus("Influenza", s, i, p, l) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё РІС‹Р·С‹РІР°РµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
+    //~Influenza() {} // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
+    void mutate() override; // РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ РјСѓС‚РёСЂРѕРІР°РЅРёСЏ РІРёСЂСѓСЃР°
+    void cure() override; // РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ РѕСЃР»Р°Р±РµРІР°РЅРёСЏ РІРёСЂСѓСЃР°
+    std::string funcInfluenza(); // РЎРѕР±СЃС‚РІРµРЅРЅС‹Р№ РјРµС‚РѕРґ РєР»Р°СЃСЃР°
 };
 
-class Smallpox : public Virus // Класс оспа
+class Smallpox : public Virus // РљР»Р°СЃСЃ РѕСЃРїР°
 {
 public:
-    //Smallpox() : Virus("Smallpox", "Beta", 1000, 10, 0.1) {} // Конструктор вызывает конструктор базового класса
-    Smallpox(std::string s, int i, double p, double l) : Virus("Smallpox", s, i, p, l) {} // Конструктор с параметрами вызывает конструктор с параметрами базового класса
-    //~Smallpox() {} // Деструктор
-    void mutate() override; // Переопределенный метод мутирования вируса
-    void cure() override; // Переопределенный метод ослабевания вируса
-    std::string funcSmallpox(); // Собственный метод класса
+    //Smallpox() : Virus("Smallpox", "Beta", 1000, 10, 0.1) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РІС‹Р·С‹РІР°РµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
+    Smallpox(std::string s, int i, double p, double l) : Virus("Smallpox", s, i, p, l) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё РІС‹Р·С‹РІР°РµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
+    //~Smallpox() {} // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
+    void mutate() override; // РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ РјСѓС‚РёСЂРѕРІР°РЅРёСЏ РІРёСЂСѓСЃР°
+    void cure() override; // РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ РѕСЃР»Р°Р±РµРІР°РЅРёСЏ РІРёСЂСѓСЃР°
+    std::string funcSmallpox(); // РЎРѕР±СЃС‚РІРµРЅРЅС‹Р№ РјРµС‚РѕРґ РєР»Р°СЃСЃР°
 };
 
-class Plague : public Virus // Класс чума
+class Plague : public Virus // РљР»Р°СЃСЃ С‡СѓРјР°
 {
 public:
-    //Plague() : Virus("Plague", "Zeta", 1000, 10, 0.1) {} // Конструктор вызывает конструктор базового класса
-    Plague(std::string s, int i, double p, double l) : Virus("Plague", s, i, p, l) {} // Конструктор с параметрами вызывает конструктор с параметрами базового класса
-    //~Plague() {} // Деструктор
-    void mutate() override; // Переопределенный метод мутирования вируса
-    void cure() override; // Переопределенный метод ослабевания вируса
-    std::string funcPlague(); // Собственный метод класса
+    //Plague() : Virus("Plague", "Zeta", 1000, 10, 0.1) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РІС‹Р·С‹РІР°РµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
+    Plague(std::string s, int i, double p, double l) : Virus("Plague", s, i, p, l) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё РІС‹Р·С‹РІР°РµС‚ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°
+    //~Plague() {} // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
+    void mutate() override; // РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ РјСѓС‚РёСЂРѕРІР°РЅРёСЏ РІРёСЂСѓСЃР°
+    void cure() override; // РџРµСЂРµРѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ РјРµС‚РѕРґ РѕСЃР»Р°Р±РµРІР°РЅРёСЏ РІРёСЂСѓСЃР°
+    std::string funcPlague(); // РЎРѕР±СЃС‚РІРµРЅРЅС‹Р№ РјРµС‚РѕРґ РєР»Р°СЃСЃР°
 };
 
 bool isInRange(std::string input);
@@ -95,15 +95,15 @@ void do6(std::vector<Virus*>& viruses);
 
 int main()
 {
-    std::vector<Virus*> viruses; // Создаем пустой массив указателей на базовый класс
+    std::vector<Virus*> viruses; // РЎРѕР·РґР°РµРј РїСѓСЃС‚РѕР№ РјР°СЃСЃРёРІ СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° Р±Р°Р·РѕРІС‹Р№ РєР»Р°СЃСЃ
     //COVID19 v("Omicron", 10, 2, 0.03);
     //COVID19* point_v = &v;
     //viruses.push_back(point_v);
     //setlocale(LC_ALL, "Russian");
-    sf::RenderWindow window(sf::VideoMode(800, 600), L"Вирусы", sf::Style::Default); //  “sf::Style::Default” указывает стиль окна настроен на использование стандартного стиля SFML, но можно указать и другие стили.
+    sf::RenderWindow window(sf::VideoMode(800, 600), L"Р’РёСЂСѓСЃС‹", sf::Style::Default); //  вЂњsf::Style::DefaultвЂќ СѓРєР°Р·С‹РІР°РµС‚ СЃС‚РёР»СЊ РѕРєРЅР° РЅР°СЃС‚СЂРѕРµРЅ РЅР° РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРіРѕ СЃС‚РёР»СЏ SFML, РЅРѕ РјРѕР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ Рё РґСЂСѓРіРёРµ СЃС‚РёР»Рё.
     //window.setUnicodeDetails(true);
 
-    // Загрузка шрифта с проверкой
+    // Р—Р°РіСЂСѓР·РєР° С€СЂРёС„С‚Р° СЃ РїСЂРѕРІРµСЂРєРѕР№
     sf::Font font;
     if (!font.loadFromFile("CyrilicOld.TTF"))
     {
@@ -112,15 +112,15 @@ int main()
     }
 
 
-    // Настраиваем текст и его нахождение для меню
-    sf::Text menu_title("Выберите действие:", font, 24);
-    sf::Text text1("1. Добавить новый вирус в массив", font, 24);
-    sf::Text text2("2. Заставить вирус распространяться", font, 24);
-    sf::Text text3("3. Ослабить вирус", font, 24);
-    sf::Text text4("4. Сделать вирус сильнее", font, 24);
-    sf::Text text5("5. Вывести все вирусы", font, 24);
-    sf::Text text6("6. Выполнить уникальный метод класса", font, 24);
-    sf::Text menu_exit("7. Выход", font, 24);
+    // РќР°СЃС‚СЂР°РёРІР°РµРј С‚РµРєСЃС‚ Рё РµРіРѕ РЅР°С…РѕР¶РґРµРЅРёРµ РґР»СЏ РјРµРЅСЋ
+    sf::Text menu_title("Р’С‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ:", font, 24);
+    sf::Text text1("1. Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ РІРёСЂСѓСЃ РІ РјР°СЃСЃРёРІ", font, 24);
+    sf::Text text2("2. Р—Р°СЃС‚Р°РІРёС‚СЊ РІРёСЂСѓСЃ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏС‚СЊСЃСЏ", font, 24);
+    sf::Text text3("3. РћСЃР»Р°Р±РёС‚СЊ РІРёСЂСѓСЃ", font, 24);
+    sf::Text text4("4. РЎРґРµР»Р°С‚СЊ РІРёСЂСѓСЃ СЃРёР»СЊРЅРµРµ", font, 24);
+    sf::Text text5("5. Р’С‹РІРµСЃС‚Рё РІСЃРµ РІРёСЂСѓСЃС‹", font, 24);
+    sf::Text text6("6. Р’С‹РїРѕР»РЅРёС‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹Р№ РјРµС‚РѕРґ РєР»Р°СЃСЃР°", font, 24);
+    sf::Text menu_exit("7. Р’С‹С…РѕРґ", font, 24);
     sf::Text consoleOutput("", font, 24);
 
     menu_title.setPosition(0, 0);
@@ -133,7 +133,7 @@ int main()
     menu_exit.setPosition(0, 350);
     consoleOutput.setPosition(0, 400);
 
-    // Для управления цветом пунктов меню
+    // Р”Р»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ С†РІРµС‚РѕРј РїСѓРЅРєС‚РѕРІ РјРµРЅСЋ
     bool clicked_text1 = false;
     bool clicked_text2 = false;
     bool clicked_text3 = false;
@@ -142,7 +142,7 @@ int main()
     bool clicked_text6 = false;
     bool clicked_menu_exit = false;
 
-    // Для перемещения камеры
+    // Р”Р»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ РєР°РјРµСЂС‹
     sf::View view = window.getView();
     float view_speed = 50.0f;
 
@@ -154,19 +154,19 @@ int main()
     {
         sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
 
-        // Обработка наведения мышью на пункты меню начало
+        // РћР±СЂР°Р±РѕС‚РєР° РЅР°РІРµРґРµРЅРёСЏ РјС‹С€СЊСЋ РЅР° РїСѓРЅРєС‚С‹ РјРµРЅСЋ РЅР°С‡Р°Р»Рѕ
         if (text1.getGlobalBounds().contains((sf::Vector2f)mouse_pos)) {
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                 text1.setFillColor(sf::Color::Red);
                 clicked_text1 = true;
                 if (do1(viruses))
                 {
-                    consoleOutput.setString("Новый вирус успешно добавлен");
+                    consoleOutput.setString("РќРѕРІС‹Р№ РІРёСЂСѓСЃ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅ");
                     consoleOutput.setFillColor(sf::Color::Green);
                 }
                 else
                 {
-                    consoleOutput.setString("Новый вирус не добавлен");
+                    consoleOutput.setString("РќРѕРІС‹Р№ РІРёСЂСѓСЃ РЅРµ РґРѕР±Р°РІР»РµРЅ");
                     consoleOutput.setFillColor(sf::Color::Red);
                 }
                 clicked_text1 = false;
@@ -185,16 +185,16 @@ int main()
                 clicked_text2 = true;
                 if (do2(viruses))
                 {
-                    consoleOutput.setString("Вирус распространился");
+                    consoleOutput.setString("Р’РёСЂСѓСЃ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРёР»СЃСЏ");
                     consoleOutput.setFillColor(sf::Color::Green);
                 }
                 else
                 {
-                    consoleOutput.setString("Вирус не распространился");
+                    consoleOutput.setString("Р’РёСЂСѓСЃ РЅРµ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРёР»СЃСЏ");
                     consoleOutput.setFillColor(sf::Color::Red);
                 }
                 clicked_text2 = false;
-                //consoleOutput.setString("Вирусы распространены");
+                //consoleOutput.setString("Р’РёСЂСѓСЃС‹ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅС‹");
                 //consoleOutput.setFillColor(sf::Color::Green);
             }
             else if (!clicked_text2) {
@@ -210,7 +210,7 @@ int main()
                 text3.setFillColor(sf::Color::Red);
                 clicked_text3 = true;
                 do3(viruses);
-                consoleOutput.setString("Вирус ослаблен");
+                consoleOutput.setString("Р’РёСЂСѓСЃ РѕСЃР»Р°Р±Р»РµРЅ");
                 consoleOutput.setFillColor(sf::Color::Green);
             }
             else if (!clicked_text3) {
@@ -226,7 +226,7 @@ int main()
                 text4.setFillColor(sf::Color::Red);
                 clicked_text4 = true;
                 do4(viruses);
-                consoleOutput.setString("Вирус усилен");
+                consoleOutput.setString("Р’РёСЂСѓСЃ СѓСЃРёР»РµРЅ");
                 consoleOutput.setFillColor(sf::Color::Green);
             }
             else if (!clicked_text4) {
@@ -281,7 +281,7 @@ int main()
         else {
             menu_exit.setFillColor(sf::Color::White);
         }
-        // Обработка наведения мышью на пункты меню конец
+        // РћР±СЂР°Р±РѕС‚РєР° РЅР°РІРµРґРµРЅРёСЏ РјС‹С€СЊСЋ РЅР° РїСѓРЅРєС‚С‹ РјРµРЅСЋ РєРѕРЅРµС†
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -336,7 +336,7 @@ int main()
         window.draw(text6);
         window.draw(menu_exit);
         window.draw(consoleOutput);
-        // Выводим на экран
+        // Р’С‹РІРѕРґРёРј РЅР° СЌРєСЂР°РЅ
         window.display();
     }
 
@@ -345,11 +345,11 @@ int main()
 
 
 bool isInRange(std::string input) {
-    // Конвертируем строку в число с плавающей точкой
+    // РљРѕРЅРІРµСЂС‚РёСЂСѓРµРј СЃС‚СЂРѕРєСѓ РІ С‡РёСЃР»Рѕ СЃ РїР»Р°РІР°СЋС‰РµР№ С‚РѕС‡РєРѕР№
     input[1] = '.';
     double num = stod(input);
 
-    // Проверяем, что число находится в диапазоне (0, 1)
+    // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ С‡РёСЃР»Рѕ РЅР°С…РѕРґРёС‚СЃСЏ РІ РґРёР°РїР°Р·РѕРЅРµ (0, 1)
     if (num > 0.0 && num < 1.0) {
         return true;
     }
@@ -360,7 +360,7 @@ bool isInRange(std::string input) {
 //vector<Virus*> viruses
 bool do1(std::vector<Virus*>& viruses)
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), L"Добавление вируса", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(800, 600), L"Р”РѕР±Р°РІР»РµРЅРёРµ РІРёСЂСѓСЃР°", sf::Style::Default);
 
     sf::Font font;
     if (!font.loadFromFile("CyrilicOld.TTF"))
@@ -373,7 +373,7 @@ bool do1(std::vector<Virus*>& viruses)
     const int FIELD_WIDTH = 200;
     const int FIELD_HEIGHT = 30;
 
-    sf::Text title1("Введите штамм вируса", font, 20);
+    sf::Text title1("Р’РІРµРґРёС‚Рµ С€С‚Р°РјРј РІРёСЂСѓСЃР°", font, 20);
     title1.setFillColor(sf::Color::White);
     title1.setPosition(50, 200);
 
@@ -387,11 +387,11 @@ bool do1(std::vector<Virus*>& viruses)
     input1.setFillColor(sf::Color::White);
     input1.setPosition(50, 250);
 
-    sf::Text info1("Заглавные латинские буквы и цифры", font, 16);
+    sf::Text info1("Р—Р°РіР»Р°РІРЅС‹Рµ Р»Р°С‚РёРЅСЃРєРёРµ Р±СѓРєРІС‹ Рё С†РёС„СЂС‹", font, 16);
     info1.setFillColor(sf::Color::White);
     info1.setPosition(50, 300);
 
-    sf::Text title2("Введите число зараженных", font, 20);
+    sf::Text title2("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ Р·Р°СЂР°Р¶РµРЅРЅС‹С…", font, 20);
     title2.setFillColor(sf::Color::White);
     title2.setPosition(450, 200);
 
@@ -405,11 +405,11 @@ bool do1(std::vector<Virus*>& viruses)
     input2.setFillColor(sf::Color::White);
     input2.setPosition(450, 250);
 
-    sf::Text info2("Натуральное число или ноль", font, 16);
+    sf::Text info2("РќР°С‚СѓСЂР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РёР»Рё РЅРѕР»СЊ", font, 16);
     info2.setFillColor(sf::Color::White);
     info2.setPosition(450, 300);
 
-    sf::Text title3("Введите число распространений за время", font, 20);
+    sf::Text title3("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРёР№ Р·Р° РІСЂРµРјСЏ", font, 20);
     title3.setFillColor(sf::Color::White);
     title3.setPosition(50, 400);
 
@@ -423,11 +423,11 @@ bool do1(std::vector<Virus*>& viruses)
     input3.setFillColor(sf::Color::White);
     input3.setPosition(50, 450);
 
-    sf::Text info3("Натуральное число или ноль", font, 16);
+    sf::Text info3("РќР°С‚СѓСЂР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РёР»Рё РЅРѕР»СЊ", font, 16);
     info3.setFillColor(sf::Color::White);
     info3.setPosition(50, 500);
 
-    sf::Text title4("Введите летальность", font, 20);
+    sf::Text title4("Р’РІРµРґРёС‚Рµ Р»РµС‚Р°Р»СЊРЅРѕСЃС‚СЊ", font, 20);
     title4.setFillColor(sf::Color::White);
     title4.setPosition(450, 400);
 
@@ -441,7 +441,7 @@ bool do1(std::vector<Virus*>& viruses)
     input4.setFillColor(sf::Color::White);
     input4.setPosition(450, 450);
 
-    sf::Text info4("Рациональное число, лежащее в интервале (0;1)", font, 16);
+    sf::Text info4("Р Р°С†РёРѕРЅР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ, Р»РµР¶Р°С‰РµРµ РІ РёРЅС‚РµСЂРІР°Р»Рµ (0;1)", font, 16);
     info4.setFillColor(sf::Color::White);
     info4.setPosition(450, 500);
 
@@ -452,19 +452,19 @@ bool do1(std::vector<Virus*>& viruses)
 
 
 
-    sf::Text virus("Коронавирус", font, 30);
+    sf::Text virus("РљРѕСЂРѕРЅР°РІРёСЂСѓСЃ", font, 30);
     virus.setFillColor(sf::Color::White);
     virus.setPosition(50, 50);
 
-    sf::Text flu("Грипп", font, 30);
+    sf::Text flu("Р“СЂРёРїРї", font, 30);
     flu.setFillColor(sf::Color::White);
     flu.setPosition(450, 50);
 
-    sf::Text smallpox("Оспа", font, 30);
+    sf::Text smallpox("РћСЃРїР°", font, 30);
     smallpox.setFillColor(sf::Color::White);
     smallpox.setPosition(50, 100);
 
-    sf::Text plague("Чума", font, 30);
+    sf::Text plague("Р§СѓРјР°", font, 30);
     plague.setFillColor(sf::Color::White);
     plague.setPosition(450, 100);
 
@@ -473,19 +473,19 @@ bool do1(std::vector<Virus*>& viruses)
     bool smallpoxSelected = false;
     bool plagueSelected = false;
 
-    sf::Text choose("Выберите какой вирус создать", font, 24);
+    sf::Text choose("Р’С‹Р±РµСЂРёС‚Рµ РєР°РєРѕР№ РІРёСЂСѓСЃ СЃРѕР·РґР°С‚СЊ", font, 24);
     choose.setFillColor(sf::Color::White);
     choose.setPosition(0, 0);
 
-    sf::Text input("Выберите какой вирус создать", font, 24);
+    sf::Text input("Р’С‹Р±РµСЂРёС‚Рµ РєР°РєРѕР№ РІРёСЂСѓСЃ СЃРѕР·РґР°С‚СЊ", font, 24);
     input.setFillColor(sf::Color::White);
     input.setPosition(0, 150);
 
-    sf::Text ready("Готово", font, 30);
+    sf::Text ready("Р“РѕС‚РѕРІРѕ", font, 30);
     ready.setFillColor(sf::Color::White);
     ready.setPosition(450, 550);
 
-    sf::Text cancel("Отмена", font, 30);
+    sf::Text cancel("РћС‚РјРµРЅР°", font, 30);
     cancel.setFillColor(sf::Color::White);
     cancel.setPosition(50, 550);
 
@@ -507,7 +507,7 @@ bool do1(std::vector<Virus*>& viruses)
                 return false;
             }
 
-            else if (event.type == sf::Event::MouseButtonPressed) // Определение, какое поле было кликнуто для активации
+            else if (event.type == sf::Event::MouseButtonPressed) // РћРїСЂРµРґРµР»РµРЅРёРµ, РєР°РєРѕРµ РїРѕР»Рµ Р±С‹Р»Рѕ РєР»РёРєРЅСѓС‚Рѕ РґР»СЏ Р°РєС‚РёРІР°С†РёРё
             {
                 sf::Vector2f mousePos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
                 if (field1.getGlobalBounds().contains(mousePos))
@@ -570,7 +570,7 @@ bool do1(std::vector<Virus*>& viruses)
                 {
                     bool canCreate = true;
 
-                    if (!(virusSelected || fluSelected || smallpoxSelected || plagueSelected)) // Если ни один не выбран
+                    if (!(virusSelected || fluSelected || smallpoxSelected || plagueSelected)) // Р•СЃР»Рё РЅРё РѕРґРёРЅ РЅРµ РІС‹Р±СЂР°РЅ
                     {
                         choose.setFillColor(sf::Color::Red);
                         canCreate = false;
@@ -612,7 +612,7 @@ bool do1(std::vector<Virus*>& viruses)
 
                     if (canCreate)
                     {
-                        // Добавляем в массив
+                        // Р”РѕР±Р°РІР»СЏРµРј РІ РјР°СЃСЃРёРІ
                         std::string strain = input1.getString();
                         std::string numInfected = input2.getString();
                         std::string propPerSecond = input3.getString();
@@ -657,15 +657,15 @@ bool do1(std::vector<Virus*>& viruses)
                 }
             }
 
-            else if (event.type == sf::Event::TextEntered) // Ввод текста в активное поле
+            else if (event.type == sf::Event::TextEntered) // Р’РІРѕРґ С‚РµРєСЃС‚Р° РІ Р°РєС‚РёРІРЅРѕРµ РїРѕР»Рµ
             {
                 if (active1)
                 {
-                    if (event.text.unicode == '\b' && !input1.getString().isEmpty()) // Обработка символа "backspace" в поле ввода
+                    if (event.text.unicode == '\b' && !input1.getString().isEmpty()) // РћР±СЂР°Р±РѕС‚РєР° СЃРёРјРІРѕР»Р° "backspace" РІ РїРѕР»Рµ РІРІРѕРґР°
                     {
                         input1.setString(input1.getString().substring(0, input1.getString().getSize() - 1));
                     }
-                    else if ((event.text.unicode >= 'A' && event.text.unicode <= 'Z' || event.text.unicode >= '0' && event.text.unicode <= '9') && input1.getString().getSize() < 8) // Добавление символа в поле ввода
+                    else if ((event.text.unicode >= 'A' && event.text.unicode <= 'Z' || event.text.unicode >= '0' && event.text.unicode <= '9') && input1.getString().getSize() < 8) // Р”РѕР±Р°РІР»РµРЅРёРµ СЃРёРјРІРѕР»Р° РІ РїРѕР»Рµ РІРІРѕРґР°
                     {
                         input1.setString(input1.getString() + static_cast<char>(event.text.unicode));
                     }
@@ -738,7 +738,7 @@ bool do1(std::vector<Virus*>& viruses)
                 }
             }
 
-            // Обновление текста ввода на активном поле
+            // РћР±РЅРѕРІР»РµРЅРёРµ С‚РµРєСЃС‚Р° РІРІРѕРґР° РЅР° Р°РєС‚РёРІРЅРѕРј РїРѕР»Рµ
             if (active1)
             {
                 field1.setOutlineColor(sf::Color::Green);
@@ -846,7 +846,7 @@ bool do1(std::vector<Virus*>& viruses)
 
 bool do2(std::vector<Virus*>& viruses)
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), L"Распространение вируса", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(800, 600), L"Р Р°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРёРµ РІРёСЂСѓСЃР°", sf::Style::Default);
 
     sf::Font font;
     font.loadFromFile("CyrilicOld.TTF");
@@ -854,7 +854,7 @@ bool do2(std::vector<Virus*>& viruses)
     const int FIELD_WIDTH = 200;
     const int FIELD_HEIGHT = 30;
 
-    sf::Text title("Введите сколько времени должен распространяться вирус", font, 20);
+    sf::Text title("Р’РІРµРґРёС‚Рµ СЃРєРѕР»СЊРєРѕ РІСЂРµРјРµРЅРё РґРѕР»Р¶РµРЅ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅСЏС‚СЊСЃСЏ РІРёСЂСѓСЃ", font, 20);
     title.setFillColor(sf::Color::White);
     title.setPosition(0, 0);
 
@@ -868,15 +868,15 @@ bool do2(std::vector<Virus*>& viruses)
     input.setFillColor(sf::Color::White);
     input.setPosition(50, 50);
 
-    sf::Text info("Натуральное число или ноль", font, 16);
+    sf::Text info("РќР°С‚СѓСЂР°Р»СЊРЅРѕРµ С‡РёСЃР»Рѕ РёР»Рё РЅРѕР»СЊ", font, 16);
     info.setFillColor(sf::Color::White);
     info.setPosition(50, 100);
 
-    sf::Text ready("Готово", font, 24);
+    sf::Text ready("Р“РѕС‚РѕРІРѕ", font, 24);
     ready.setFillColor(sf::Color::White);
     ready.setPosition(0, 150);
 
-    sf::Text cancel("Отмена", font, 24);
+    sf::Text cancel("РћС‚РјРµРЅР°", font, 24);
     cancel.setFillColor(sf::Color::White);
     cancel.setPosition(0, 200);
 
@@ -909,7 +909,7 @@ bool do2(std::vector<Virus*>& viruses)
                     else
                     {
                         std::string input_str = input.getString();
-                        for (auto virus : viruses) { // Для всех вирусов вызываем метод распространения с данными введенными от пользователя
+                        for (auto virus : viruses) { // Р”Р»СЏ РІСЃРµС… РІРёСЂСѓСЃРѕРІ РІС‹Р·С‹РІР°РµРј РјРµС‚РѕРґ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРёСЏ СЃ РґР°РЅРЅС‹РјРё РІРІРµРґРµРЅРЅС‹РјРё РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
                             virus->spread(std::stoi(input_str));
                         }
                         return true;
@@ -922,7 +922,7 @@ bool do2(std::vector<Virus*>& viruses)
                 }
             }
 
-            else if (event.type == sf::Event::TextEntered) // Ввод текста в активное поле
+            else if (event.type == sf::Event::TextEntered) // Р’РІРѕРґ С‚РµРєСЃС‚Р° РІ Р°РєС‚РёРІРЅРѕРµ РїРѕР»Рµ
             {
                 if (event.text.unicode == '\b' && !input.getString().isEmpty())
                 {
@@ -972,7 +972,7 @@ void do4(std::vector<Virus*>& viruses)
 
 void do5(std::vector<Virus*>& viruses)
 {
-    sf::RenderWindow window(sf::VideoMode(1200, 600), L"Все вирусы", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(1200, 600), L"Р’СЃРµ РІРёСЂСѓСЃС‹", sf::Style::Default);
 
     sf::View view = window.getView();
     float view_speed = 50.0f;
@@ -980,7 +980,7 @@ void do5(std::vector<Virus*>& viruses)
     sf::Font font;
     font.loadFromFile("CyrilicOld.TTF");
 
-    sf::Text titleName("НАЗВАНИЕ ВИРУСА", font, 20);
+    sf::Text titleName("РќРђР—Р’РђРќРР• Р’РР РЈРЎРђ", font, 20);
     titleName.setPosition(0, 0);
     titleName.setFillColor(sf::Color::White);
 
@@ -988,7 +988,7 @@ void do5(std::vector<Virus*>& viruses)
     name.setPosition(0, 50);
     name.setFillColor(sf::Color::White);
 
-    sf::Text titleStain("ШТАММ", font, 20);
+    sf::Text titleStain("РЁРўРђРњРњ", font, 20);
     titleStain.setPosition(230, 0);
     titleStain.setFillColor(sf::Color::White);
 
@@ -996,7 +996,7 @@ void do5(std::vector<Virus*>& viruses)
     strain.setPosition(230, 50);
     strain.setFillColor(sf::Color::White);
 
-    sf::Text titleNumInfected("ЧИСЛО ЗАРАЖЕННЫХ", font, 20);
+    sf::Text titleNumInfected("Р§РРЎР›Рћ Р—РђР РђР–Р•РќРќР«РҐ", font, 20);
     titleNumInfected.setPosition(350, 0);
     titleNumInfected.setFillColor(sf::Color::White);
 
@@ -1004,7 +1004,7 @@ void do5(std::vector<Virus*>& viruses)
     numInfected.setPosition(350, 50);
     numInfected.setFillColor(sf::Color::White);
 
-    sf::Text titlePropagationPerSecond("РАСПРОСТРАНЕНИЯ ЗА ВРЕМЯ", font, 20);
+    sf::Text titlePropagationPerSecond("Р РђРЎРџР РћРЎРўР РђРќР•РќРРЇ Р—Рђ Р’Р Р•РњРЇ", font, 20);
     titlePropagationPerSecond.setPosition(650, 0);
     titlePropagationPerSecond.setFillColor(sf::Color::White);
 
@@ -1012,7 +1012,7 @@ void do5(std::vector<Virus*>& viruses)
     propagationPerSecond.setPosition(650, 50);
     propagationPerSecond.setFillColor(sf::Color::White);
 
-    sf::Text titleLethality("ЛЕТАЛЬНОСТЬ", font, 20);
+    sf::Text titleLethality("Р›Р•РўРђР›Р¬РќРћРЎРўР¬", font, 20);
     titleLethality.setPosition(1050, 0);
     titleLethality.setFillColor(sf::Color::White);
 
@@ -1056,13 +1056,13 @@ void do5(std::vector<Virus*>& viruses)
             std::string Name = viruses[i]->getName();
 
             if (Name == "COVID-19")
-                Name = "Коронавирус";
+                Name = "РљРѕСЂРѕРЅР°РІРёСЂСѓСЃ";
             else if (Name == "Influenza")
-                Name = "Грипп";
+                Name = "Р“СЂРёРїРї";
             else if (Name == "Smallpox")
-                Name = "Оспа";
+                Name = "РћСЃРїР°";
             else if (Name == "Plague")
-                Name = "Чума";
+                Name = "Р§СѓРјР°";
 
             std::string Strain = viruses[i]->getStrain();
             std::string NumInfected = std::to_string(viruses[i]->getNumInfected());
@@ -1105,7 +1105,7 @@ void do5(std::vector<Virus*>& viruses)
 
 void do6(std::vector<Virus*>& viruses)
 {
-    sf::RenderWindow window(sf::VideoMode(1200, 600), L"Уникальные методы вирусов", sf::Style::Default);
+    sf::RenderWindow window(sf::VideoMode(1200, 600), L"РЈРЅРёРєР°Р»СЊРЅС‹Рµ РјРµС‚РѕРґС‹ РІРёСЂСѓСЃРѕРІ", sf::Style::Default);
 
     sf::View view = window.getView();
     float view_speed = 50.0f;
@@ -1142,39 +1142,39 @@ void do6(std::vector<Virus*>& viruses)
         int i = 0;
         for (auto virus : viruses)
         {
-            if (virus->getName() == "COVID-19") // Если этот вирус - коронавирус
+            if (virus->getName() == "COVID-19") // Р•СЃР»Рё СЌС‚РѕС‚ РІРёСЂСѓСЃ - РєРѕСЂРѕРЅР°РІРёСЂСѓСЃ
             {
-                COVID19* v = dynamic_cast<COVID19*>(virus); // Создаем указатель на короновирус
-                if (v != nullptr) // Если получилось создать указатель на короновирус
+                COVID19* v = dynamic_cast<COVID19*>(virus); // РЎРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РєРѕСЂРѕРЅРѕРІРёСЂСѓСЃ
+                if (v != nullptr) // Р•СЃР»Рё РїРѕР»СѓС‡РёР»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РєРѕСЂРѕРЅРѕРІРёСЂСѓСЃ
                 {
-                    info.setString(v->funcCOVID19()); // Вызваем собственный метод короновируса
+                    info.setString(v->funcCOVID19()); // Р’С‹Р·РІР°РµРј СЃРѕР±СЃС‚РІРµРЅРЅС‹Р№ РјРµС‚РѕРґ РєРѕСЂРѕРЅРѕРІРёСЂСѓСЃР°
                 }
             }
 
-            if (virus->getName() == "Influenza") // Если этот вирус - грипп
+            if (virus->getName() == "Influenza") // Р•СЃР»Рё СЌС‚РѕС‚ РІРёСЂСѓСЃ - РіСЂРёРїРї
             {
-                Influenza* v = dynamic_cast<Influenza*>(virus); // Создаем указатель на грипп
-                if (v != nullptr) // Если получилось создать указатель на грипп
+                Influenza* v = dynamic_cast<Influenza*>(virus); // РЎРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РіСЂРёРїРї
+                if (v != nullptr) // Р•СЃР»Рё РїРѕР»СѓС‡РёР»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РіСЂРёРїРї
                 {
-                    info.setString(v->funcInfluenza()); // Вызваем собственный метод гриппа
+                    info.setString(v->funcInfluenza()); // Р’С‹Р·РІР°РµРј СЃРѕР±СЃС‚РІРµРЅРЅС‹Р№ РјРµС‚РѕРґ РіСЂРёРїРїР°
                 }
             }
 
-            if (virus->getName() == "Smallpox") // Если этот вирус - оспа
+            if (virus->getName() == "Smallpox") // Р•СЃР»Рё СЌС‚РѕС‚ РІРёСЂСѓСЃ - РѕСЃРїР°
             {
-                Smallpox* v = dynamic_cast<Smallpox*>(virus); // Создаем указатель на оспу
-                if (v != nullptr)  // Если получилось создать указатель на оспу
+                Smallpox* v = dynamic_cast<Smallpox*>(virus); // РЎРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РѕСЃРїСѓ
+                if (v != nullptr)  // Р•СЃР»Рё РїРѕР»СѓС‡РёР»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РѕСЃРїСѓ
                 {
-                    info.setString(v->funcSmallpox()); // Вызваем собственный метод оспы
+                    info.setString(v->funcSmallpox()); // Р’С‹Р·РІР°РµРј СЃРѕР±СЃС‚РІРµРЅРЅС‹Р№ РјРµС‚РѕРґ РѕСЃРїС‹
                 }
             }
 
-            if (virus->getName() == "Plague")  // Если этот вирус - чума
+            if (virus->getName() == "Plague")  // Р•СЃР»Рё СЌС‚РѕС‚ РІРёСЂСѓСЃ - С‡СѓРјР°
             {
-                Plague* v = dynamic_cast<Plague*>(virus); // Создаем указатель на чуму
-                if (v != nullptr)  // Если получилось создать указатель на чуму
+                Plague* v = dynamic_cast<Plague*>(virus); // РЎРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‡СѓРјСѓ
+                if (v != nullptr)  // Р•СЃР»Рё РїРѕР»СѓС‡РёР»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С‡СѓРјСѓ
                 {
-                    info.setString(v->funcPlague()); // Вызваем собственный метод чумы
+                    info.setString(v->funcPlague()); // Р’С‹Р·РІР°РµРј СЃРѕР±СЃС‚РІРµРЅРЅС‹Р№ РјРµС‚РѕРґ С‡СѓРјС‹
                 }
             }
 
@@ -1202,7 +1202,7 @@ void Virus::spread(int time)
 void Virus::getInfo()
 {
     //std::cout << setw(16) << left << name << setw(10) << strain << setw(17) << numInfected << setw(26) << propagationPerSecond << setw(12) << lethality << std::endl;
-    //std::cout << "Тип " + getName() + ", strain " + strain + ", name " + name + ", numInfected " + to_std::string(numInfected) + ", propagationPerSecond " + to_std::string(propagationPerSecond) + ", lethality " + to_std::string(lethality) << std::endl;
+    //std::cout << "РўРёРї " + getName() + ", strain " + strain + ", name " + name + ", numInfected " + to_std::string(numInfected) + ", propagationPerSecond " + to_std::string(propagationPerSecond) + ", lethality " + to_std::string(lethality) << std::endl;
 }
 */
 void COVID19::mutate()
@@ -1217,7 +1217,7 @@ void COVID19::cure()
 
 std::string COVID19::funcCOVID19()
 {
-    return  "COVID19 появился в 2019 году в Ухани.";
+    return  "COVID19 РїРѕСЏРІРёР»СЃСЏ РІ 2019 РіРѕРґСѓ РІ РЈС…Р°РЅРё.";
 }
 
 void Influenza::mutate()
@@ -1232,7 +1232,7 @@ void Influenza::cure()
 
 std::string Influenza::funcInfluenza()
 {
-    return "Чтобы вылечиться от гриппа нужно: соблюдать послельный режим, обильно пить теплое питьё.";
+    return "Р§С‚РѕР±С‹ РІС‹Р»РµС‡РёС‚СЊСЃСЏ РѕС‚ РіСЂРёРїРїР° РЅСѓР¶РЅРѕ: СЃРѕР±Р»СЋРґР°С‚СЊ РїРѕСЃР»РµР»СЊРЅС‹Р№ СЂРµР¶РёРј, РѕР±РёР»СЊРЅРѕ РїРёС‚СЊ С‚РµРїР»РѕРµ РїРёС‚СЊС‘.";
 }
 
 void Smallpox::mutate()
@@ -1249,7 +1249,7 @@ void Smallpox::cure()
 
 std::string Smallpox::funcSmallpox()
 {
-    return "14 мая 1796 года Эдвард Дженнер изобрел вакцину от оспы.";
+    return "14 РјР°СЏ 1796 РіРѕРґР° Р­РґРІР°СЂРґ Р”Р¶РµРЅРЅРµСЂ РёР·РѕР±СЂРµР» РІР°РєС†РёРЅСѓ РѕС‚ РѕСЃРїС‹.";
 }
 
 void Plague::mutate()
@@ -1267,5 +1267,5 @@ void Plague::cure()
 
 std::string Plague::funcPlague()
 {
-    return "Чтобы не заболеть чумой: тщательно мыть руки перед едой, употреблять в пищу безопасную питьевую воду.";
+    return "Р§С‚РѕР±С‹ РЅРµ Р·Р°Р±РѕР»РµС‚СЊ С‡СѓРјРѕР№: С‚С‰Р°С‚РµР»СЊРЅРѕ РјС‹С‚СЊ СЂСѓРєРё РїРµСЂРµРґ РµРґРѕР№, СѓРїРѕС‚СЂРµР±Р»СЏС‚СЊ РІ РїРёС‰Сѓ Р±РµР·РѕРїР°СЃРЅСѓСЋ РїРёС‚СЊРµРІСѓСЋ РІРѕРґСѓ.";
 }
